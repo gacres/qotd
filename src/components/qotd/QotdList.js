@@ -9,7 +9,6 @@ class QotdList extends React.Component {
         this.props.fetchQuestions();
     }
 
-
     render() {
         return (
             <div>

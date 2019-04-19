@@ -1,12 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { signIn } from '../../actions';
+import { login, signIn } from '../../actions';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 class QotdLogin extends React.Component {
-    state = { username: '' };
+    state = { username: '', token: '' };
+    componentDidMount() {
+        console.log("entering QotdLogin.componentDidMount")
+        this.props.login();
+    }
 
     onFormSubmit = (event) => {
         event.preventDefault();
@@ -51,8 +55,9 @@ const mapStateToProps = (state) => {
     return { 
         username: state.username,
         questions: state.questions,
-        qotd: state.qotd
+        qotd: state.qotd,
+        token: state.token
     }
 };
 
-export default connect(mapStateToProps, { signIn })(QotdLogin);
+export default connect(mapStateToProps, { login, signIn })(QotdLogin);
