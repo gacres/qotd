@@ -22,7 +22,7 @@ class Navigation extends React.Component {
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
                         <Nav.Link href="#question">Today's Question</Nav.Link>
-                        <Nav.Link href="#results">Results</Nav.Link>
+                        <Nav.Link href="/results">Results</Nav.Link>
                         <Nav.Link href="https://c3ug.ca">C3UG</Nav.Link>
                         <Nav.Link href="https://openntf.org">OpenNTF</Nav.Link>
                         </Nav>

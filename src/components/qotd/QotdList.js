@@ -1,7 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Table from 'react-bootstrap/Table';
+import { fetchQuestions } from '../../actions';
+
 
 class QotdList extends React.Component {
+    componentDidMount() {
+        this.props.fetchQuestions();
+    }
+
 
     render() {
         return (
@@ -41,4 +48,10 @@ class QotdList extends React.Component {
     }
 }
 
-export default QotdList;
+const mapStateToProps = (state) => {
+    return {
+        questions: Object.values(state.questions)
+    }
+};
+
+export default connect(mapStateToProps, { fetchQuestions })(QotdList);

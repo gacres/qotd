@@ -1,6 +1,7 @@
 import api from '../apis/qotd';
 import history from '../history';
 import { 
+    LOG_IN,
     SIGN_IN, 
     FETCH_QOTD,
     FETCH_QUESTIONS,
@@ -8,6 +9,14 @@ import {
 } from './types';
 
 var config = {headers: { 'Content-Type': 'application/json' }, auth: { 'username': 'gacres', 'password': 'c3ugforever'}};
+
+export const login = () => async dispatch => {
+    const response = await api.get('/login', config);
+
+    console.log(response.data);
+    dispatch({ type: LOG_IN, payload: response.data});
+    history.push('/');
+}
 
 export const signIn = (username) => async dispatch => {
     const response = await api.post('/questionoftheday', { "username": username }, config);
@@ -20,7 +29,6 @@ export const signIn = (username) => async dispatch => {
         const questionKey = document.QuestionKey;
         history.push(`/qotd/${questionKey}`);
     }
-    
 };
 
 export const fetchQotd = (username) => async dispatch => {
