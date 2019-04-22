@@ -5,19 +5,15 @@ import { fetchQuestions } from '../../actions';
 
 class QotdList extends React.Component {
     componentDidMount() {
-        console.log("QotdList.componentDidMount");
         this.props.fetchQuestions();
-        console.log(this.props.questions);
     }
 
     renderList() {
         return this.props.questions.map(question => {
             return (
                 <div id={question.QuestionKey}>
-                    <label>QuestionText</label>
                     {question.QuestionText}
                     <div>
-                        <label>QuestionDescription</label>
                         {question.QuestionDescription}
                     </div>
                 </div>
@@ -38,6 +34,7 @@ class QotdList extends React.Component {
 const mapStateToProps = (state) => {
     return {
         questions: Object.values(state.questions)
+        //questions: state.questions
     }
 };
 

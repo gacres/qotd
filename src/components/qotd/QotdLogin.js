@@ -8,7 +8,8 @@ import Form from 'react-bootstrap/Form';
 class QotdLogin extends React.Component {
     state = { username: '', token: '' };
     componentDidMount() {
-        console.log("entering QotdLogin.componentDidMount")
+        //console.log("QotdLogin.componentDidMount");
+        //console.log(this.props);
         this.props.login();
     }
 
@@ -52,9 +53,11 @@ class QotdLogin extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+    //console.log("QotdLogin.mapStateToProps");
+    //console.log(state);
     return { 
         username: state.username,
-        questions: state.questions,
+        //questions: state.questions,
         qotd: state.qotd,
         token: state.token
     }

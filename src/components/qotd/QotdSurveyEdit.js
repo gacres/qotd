@@ -35,11 +35,11 @@ class QotdSurveyEdit extends React.Component {
             let counter = 0;
             return choices.map((value, key) => {
                 counter ++;
-                console.log(key);
-                console.log(value);
+                //console.log(key);
+                //console.log(value);
                 return (
                     <div>
-                        <input type="radio" key={counter.toString()} id={key} label={value} autoComplete="off" />
+                        <input name="answer" type="radio" key={counter} id={key} label={value} autoComplete="off" />
                     </div>
                 );
             });
@@ -94,9 +94,12 @@ const formWrapped = reduxForm({
 })(QotdSurveyEdit);
 
 const mapStateToProps = (state) => {
+    //console.log("QotdSurveyEdit.mapStateToProps");
+    //console.log(state);
     return {
-        qotd: state.qotd.qotd,
-        username: state.username.username
+        qotd: state.qotd,
+        username: state.username.username,
+        token: state.token
     }
 };
 

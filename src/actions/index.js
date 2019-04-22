@@ -21,7 +21,11 @@ export const login = () => async dispatch => {
 export const signIn = (username) => async dispatch => {
     const response = await api.post('/questionoftheday', { "username": username }, token);
 
-    dispatch({ type: SIGN_IN, payload: { username: username, questions: response.data.documents, responseKey: response.data.response_key }});
+    //dispatch({ type: SIGN_IN, payload: { username: username, questions: response.data.documents, responseKey: response.data.response_key }});
+    dispatch({ type: SIGN_IN, payload: response.data });
+
+    //console.log("called signIn");
+    //console.log(response.data);
 
     if (response.data.response_key === "") {
         history.push('/qotd');
@@ -42,7 +46,7 @@ export const fetchQotd = (username) => async dispatch => {
 export const fetchQuestions = () => async dispatch => {
     console.log('called fetchQuestions');
     const response = await api.get('/listquestionsoftheday', token);
-    console.log(response.data);
+    //console.log(response.data);
     dispatch({ type: FETCH_QUESTIONS, payload: { questions: response.data.documents } });
     history.push('/responses');
 };
