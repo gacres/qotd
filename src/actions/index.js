@@ -22,7 +22,8 @@ export const signIn = (username) => async dispatch => {
     const response = await api.post('/questionoftheday', { "username": username }, token);
 
     //dispatch({ type: SIGN_IN, payload: { username: username, questions: response.data.documents, responseKey: response.data.response_key }});
-    dispatch({ type: SIGN_IN, payload: response.data });
+    let responseData={...response.data, username: username};
+    dispatch({ type: SIGN_IN, payload: responseData });
 
     //console.log("called signIn");
     //console.log(response.data);
@@ -52,7 +53,8 @@ export const fetchQuestions = () => async dispatch => {
 };
 
 export const submitQotd = (formValues) => async dispatch => {
-    console.log('called submitQotd');
+    console.log('called index.js:submitQotd');
+    console.log('formValues: ' + formValues);
     const response = await api.post('/response', formValues);
 
     dispatch({ type: SUBMIT_QOTD, payload: response.data });

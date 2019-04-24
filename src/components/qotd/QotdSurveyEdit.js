@@ -22,24 +22,18 @@ class QotdSurveyEdit extends React.Component {
         }
     }
 
-    onRadioClick() {
-
-    }
-
     renderAnswers = ({ input, meta }) => {
         const choices = this.props.qotd.QuestionChoices;
         console.log(choices);
         if (choices === undefined) {
             return <input type='radio' label='error'></input>;
         } else {
-            let counter = 0;
             return choices.map((value, key) => {
-                counter ++;
-                //console.log(key);
-                //console.log(value);
+                let inputId='questionResponse' + key;
                 return (
-                    <div>
-                        <input name="answer" type="radio" key={counter} id={key} label={value} autoComplete="off" />
+                    <div key={key}>
+                        <input name="answer" type="radio" key={key} id={inputId} label={value} autoComplete="off" />
+                        <label htmlFor={inputId}>&nbsp;&nbsp;{value}</label>
                     </div>
                 );
             });

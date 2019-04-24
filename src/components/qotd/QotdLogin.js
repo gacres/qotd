@@ -8,8 +8,6 @@ import Form from 'react-bootstrap/Form';
 class QotdLogin extends React.Component {
     state = { username: '', token: '' };
     componentDidMount() {
-        //console.log("QotdLogin.componentDidMount");
-        //console.log(this.props);
         this.props.login();
     }
 
