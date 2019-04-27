@@ -5,8 +5,8 @@ import { submitQotd } from '../../actions';
 
 class QotdSurveyEdit extends React.Component {
     componentDidMount() {
-        console.log("QotdSurveyEdit.componentDidMount");
-        console.log(this.props);
+        // console.log("QotdSurveyEdit.componentDidMount");
+        // console.log(this.props);
     }
 
     renderError({ error, touched }) {
@@ -22,9 +22,8 @@ class QotdSurveyEdit extends React.Component {
         }
     }
 
-    renderAnswers = ({ input, meta }) => {
+    renderAnswer = ({ input, meta }) => {
         const choices = this.props.qotd.QuestionChoices;
-        console.log(choices);
         if (choices === undefined) {
             return <input type='radio' label='error'></input>;
         } else {
@@ -32,8 +31,8 @@ class QotdSurveyEdit extends React.Component {
                 let inputId='questionResponse' + key;
                 return (
                     <div key={key}>
-                        <input name="answer" type="radio" key={key} id={inputId} label={value} autoComplete="off" />
-                        <label htmlFor={inputId}>&nbsp;&nbsp;{value}</label>
+                        <input name="answer" type="radio" {...input} key={key} id={inputId} autoComplete="off" />
+                        <label htmlFor={inputId}>&nbsp;{value}</label>
                     </div>
                 );
             });
@@ -41,6 +40,7 @@ class QotdSurveyEdit extends React.Component {
     }
 
     onSubmit(formValues) {
+        //console.log("submit");
         this.props.submitQotd(formValues);
     }
 
@@ -58,7 +58,7 @@ class QotdSurveyEdit extends React.Component {
                     <div className="card-body">
                         <h5 className="card-title">{this.props.qotd.QuestionText}</h5>
                         <p className="card-text">{this.props.qotd.QuestionDescription}</p>
-                        <Field name="answer" component={this.renderAnswers} />
+                        <Field name="answer" component={this.renderAnswer} />
                     </div>
                     <div className="card-footer">
                         <div>
@@ -73,6 +73,8 @@ class QotdSurveyEdit extends React.Component {
 }
 
 const validate = (formValues) => {
+    console.log("validation");
+    console.log(formValues);
     const errors = {};
 
     if (!formValues.answer) {

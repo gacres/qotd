@@ -2,7 +2,8 @@ import api from '../apis/qotd';
 import history from '../history';
 import { 
     LOG_IN,
-    SIGN_IN, 
+    SIGN_IN,
+    FETCH_RESULT,
     FETCH_QOTD,
     FETCH_QUESTIONS,
     SUBMIT_QOTD
@@ -21,35 +22,39 @@ export const login = () => async dispatch => {
 export const signIn = (username) => async dispatch => {
     const response = await api.post('/questionoftheday', { "username": username }, token);
 
-    //dispatch({ type: SIGN_IN, payload: { username: username, questions: response.data.documents, responseKey: response.data.response_key }});
     let responseData={...response.data, username: username};
     dispatch({ type: SIGN_IN, payload: responseData });
-
-    //console.log("called signIn");
-    //console.log(response.data);
 
     if (response.data.response_key === "") {
         history.push('/qotd');
     } else {
         const questionKey = document.QuestionKey;
-        history.push(`/qotd/${questionKey}`);
+        history.push(`/result/${questionKey}`);
     }
 };
 
-export const fetchQotd = (username) => async dispatch => {
+export const fetchResult = (questionKey) => async dispatch => {
+    console.log("called fetchResult");
+    const response = await api.get(`/resultsforquestionkey/${questionKey}`, token);
+
+    dispatch({ type: FETCH_RESULT, payload: response.data });
+    history.push(`/result/${questionKey}`);
+}
+
+export const fetchQotd = (questionKey) => async dispatch => {
     console.log('called fetchQotd');
-    const response = await api.post('/questionoftheday', { username: username });
+    const response = await api.get(`/resultsforquestionkey/${questionKey}`, token);
 
     dispatch({ type: FETCH_QOTD, payload: response.data });
-    history.push('/qotd');
+    history.push(`/result/${questionKey}`);
 };
 
 export const fetchQuestions = () => async dispatch => {
     console.log('called fetchQuestions');
     const response = await api.get('/listquestionsoftheday', token);
-    //console.log(response.data);
+    
     dispatch({ type: FETCH_QUESTIONS, payload: { questions: response.data.documents } });
-    history.push('/responses');
+    //history.push('/responses');
 };
 
 export const submitQotd = (formValues) => async dispatch => {

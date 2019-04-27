@@ -1,17 +1,25 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { fetchQuestions, fetchResult, login } from '../../actions';
+import { reduxForm } from 'redux-form';
 import Card from 'react-bootstrap/Card';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
 class QotdSurveyDisplay extends React.Component {
 
+    componentDidMount() {
+        
+    }
+
     render() {
+        console.log(this.props.questions);
         return (
             <div>
                 <br />
                 <Card style={{ width: '26rem' }}>
                     <Card.Header as="h5">Question of the Day</Card.Header>
                     <Card.Body>
-                        <Card.Title>What is your favourite beer?</Card.Title>
+                        <Card.Title>Graham is testing</Card.Title>
                         <div>
                             <ProgressBar striped label="Australian 15" variant="success" now={15} />
                             <br/>
@@ -30,4 +38,16 @@ class QotdSurveyDisplay extends React.Component {
     }
 }
 
-export default QotdSurveyDisplay;
+const formWrapped = reduxForm({
+    form: 'surveyResult'
+})(QotdSurveyDisplay);
+
+const mapStateToProps = (state) => {
+    return {
+        questions: Object.values(state.questions),
+        result: state.result,
+        token: state.token
+    }
+};
+
+export default connect(mapStateToProps, { fetchQuestions, fetchResult, login })(formWrapped);

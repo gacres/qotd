@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchQuestions } from '../../actions';
+import { reduxForm } from 'redux-form';
+import { fetchResult, fetchQuestions } from '../../actions';
 
 
 class QotdList extends React.Component {
@@ -8,13 +9,21 @@ class QotdList extends React.Component {
         this.props.fetchQuestions();
     }
 
+    fetchResults(questionKey) {
+        this.props.fetchResult(questionKey);
+    }
+
     renderList() {
         return this.props.questions.map(question => {
             return (
-                <div id={question.QuestionKey}>
-                    {question.QuestionText}
-                    <div>
-                        {question.QuestionDescription}
+                <div className="alert alert-secondary" key={question.QuestionKey}>
+                    <div className="row">
+                        <div className="col-sm-9">
+                            {question.QuestionText}
+                        </div>
+                        <div className="col-sm-3" >
+                            <button type="button" className="btn btn-primary" onClick={this.fetchResults(question.QuestionKey)} autoComplete="off" >View Results</button>
+                        </div>
                     </div>
                 </div>
             );
@@ -23,7 +32,7 @@ class QotdList extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <h2>Previous Questions</h2>
                 <div>{this.renderList()}</div>
             </div>
@@ -31,11 +40,15 @@ class QotdList extends React.Component {
     }
 }
 
+const formWrapped = reduxForm({
+    form: 'surveyList'
+})(QotdList);
+
 const mapStateToProps = (state) => {
     return {
-        questions: Object.values(state.questions)
-        //questions: state.questions
+        questions: Object.values(state.questions),
+        token: state.token
     }
 };
 
-export default connect(mapStateToProps, { fetchQuestions })(QotdList);
+export default connect(mapStateToProps, { fetchResult, fetchQuestions })(formWrapped);

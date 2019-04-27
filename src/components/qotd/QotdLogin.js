@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { login, signIn } from '../../actions';
+import { reduxForm } from 'redux-form';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -50,6 +51,10 @@ class QotdLogin extends React.Component {
     }
 }
 
+const formWrapped = reduxForm({
+    form: 'surveyLogin'
+})(QotdLogin);
+
 const mapStateToProps = (state) => {
     //console.log("QotdLogin.mapStateToProps");
     //console.log(state);
@@ -61,4 +66,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, { login, signIn })(QotdLogin);
+export default connect(mapStateToProps, { login, signIn })(formWrapped);
