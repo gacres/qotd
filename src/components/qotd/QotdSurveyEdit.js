@@ -2,11 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { submitQotd } from '../../actions';
+import history from '../../history';
 
 class QotdSurveyEdit extends React.Component {
     componentDidMount() {
-        // console.log("QotdSurveyEdit.componentDidMount");
-        // console.log(this.props);
+        // we need the user's login name before showing them the question
+        if (this.props.username === undefined) {
+            history.push("/");
+        }
     }
 
     renderError({ error, touched }) {
@@ -31,7 +34,7 @@ class QotdSurveyEdit extends React.Component {
                 let inputId='questionResponse' + key;
                 return (
                     <div key={key}>
-                        <input name="answer" type="radio" {...input} key={key} id={inputId} autoComplete="off" />
+                        <input name="answer" type="radio" {...input} key={key} id={inputId} value={value} autoComplete="off" />
                         <label htmlFor={inputId}>&nbsp;{value}</label>
                     </div>
                 );
@@ -39,9 +42,21 @@ class QotdSurveyEdit extends React.Component {
         }
     }
 
-    onSubmit(formValues) {
-        //console.log("submit");
-        this.props.submitQotd(formValues);
+    onSubmit = (formValues) => {
+        const submitTime = new Date().toLocaleString();
+        const submitData = {
+            'QuestionKey': this.props.qotd.QuestionKey, 
+            'QuestionType': this.props.qotd.QuestionType, 
+            'ResponseAuthor': 'Heiko Voigt/Harbour-Light/CA',
+            'ResponseComment': 'These extra fields are for future flexibility',
+            'ResponseContent': formValues.answer.split(','),
+            'ResponseKey': '',
+            'ReponseStatus': '',
+            'ResponseTimeStamp': submitTime,
+            'ResponseUserName': this.props.username, 
+            'SurveyKey': this.props.qotd.SurveyKey
+        };
+        this.props.submitQotd(submitData, this.props.qotd.QuestionKey);
     }
 
     render() {
@@ -73,8 +88,6 @@ class QotdSurveyEdit extends React.Component {
 }
 
 const validate = (formValues) => {
-    console.log("validation");
-    console.log(formValues);
     const errors = {};
 
     if (!formValues.answer) {
@@ -90,12 +103,9 @@ const formWrapped = reduxForm({
 })(QotdSurveyEdit);
 
 const mapStateToProps = (state) => {
-    //console.log("QotdSurveyEdit.mapStateToProps");
-    //console.log(state);
     return {
         qotd: state.qotd,
-        username: state.username.username,
-        token: state.token
+        username: state.username.username
     }
 };
 

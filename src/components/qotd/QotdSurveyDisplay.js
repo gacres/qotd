@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchQuestions, fetchResult, login } from '../../actions';
+import { fetchQuestions, fetchResult } from '../../actions';
 import { reduxForm } from 'redux-form';
 import Card from 'react-bootstrap/Card';
 import ProgressBar from 'react-bootstrap/ProgressBar';
@@ -8,29 +8,47 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 class QotdSurveyDisplay extends React.Component {
 
     componentDidMount() {
-        
+        const { id } = this.props.match.params;
+        if (this.props.result.length === 0) {
+            this.props.fetchResult(id);
+        }
+    }
+
+    generateResultGraph() {
+        const striping = ["success", "info", "warning", "danger", "success", "info", "warning", "danger"];
+        const answers = this.props.result;
+        const results = answers.results;
+        if (results === undefined) {
+            return <div>Loading results...</div>;
+        } else {
+            return results.map((result, key) => {
+                let lbl = result.choice + ' ' + result.value;
+
+                return <div key={key}>
+                    <ProgressBar striped label={lbl} variant={striping[key]} now={result.value} max={answers.total_responses}/>
+                </div>
+            });
+        }
+
     }
 
     render() {
-        console.log(this.props.questions);
+        const qotd = this.props.qotd;
+        const qTitle = qotd.QuestionText;
         return (
             <div>
                 <br />
                 <Card style={{ width: '26rem' }}>
                     <Card.Header as="h5">Question of the Day</Card.Header>
                     <Card.Body>
-                        <Card.Title>Graham is testing</Card.Title>
+                        <Card.Title>{qTitle}</Card.Title>
+                        <div>{qotd.QuestionDescription}</div>
+                        <br />
                         <div>
-                            <ProgressBar striped label="Australian 15" variant="success" now={15} />
-                            <br/>
-                            <ProgressBar striped label="Belgian 60" variant="info" now={60} />
-                            <br/>
-                            <ProgressBar striped label="Canadian 25" variant="warning" now={25} />
-                            <br/>
-                            <ProgressBar animated label="German 65" variant="danger" now={65} />
-                            <br/>
-                            <ProgressBar striped label="Guiness 50" variant="success" now={50} />
+                            {this.generateResultGraph()}
                         </div>
+                        <br />
+                        <label>Total responses: {this.props.result.total_responses}</label>
                     </Card.Body>
                 </Card>
             </div>
@@ -44,10 +62,12 @@ const formWrapped = reduxForm({
 
 const mapStateToProps = (state) => {
     return {
+        qotd: state.qotd,
         questions: Object.values(state.questions),
         result: state.result,
-        token: state.token
+        //token: state.token.token,
+        username: state.username.username
     }
 };
 
-export default connect(mapStateToProps, { fetchQuestions, fetchResult, login })(formWrapped);
+export default connect(mapStateToProps, { fetchQuestions, fetchResult })(formWrapped);

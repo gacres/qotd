@@ -5,7 +5,6 @@ import qotdReducer from './qotdReducer';
 import questionsReducer from './questionsReducer';
 import responseReducer from './responseReducer';
 import resultReducer from './resultReducer';
-import initializeReducer from './initializeReducer';
 
 export default combineReducers({
     form: formReducer,
@@ -13,6 +12,5 @@ export default combineReducers({
     questions: questionsReducer,
     responseKey: responseReducer,
     result: resultReducer,
-    token: initializeReducer,
     username: loginReducer
 });

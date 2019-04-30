@@ -6,6 +6,7 @@ import { fetchResult, fetchQuestions } from '../../actions';
 
 class QotdList extends React.Component {
     componentDidMount() {
+        console.log(this.props);
         this.props.fetchQuestions();
     }
 
@@ -22,7 +23,10 @@ class QotdList extends React.Component {
                             {question.QuestionText}
                         </div>
                         <div className="col-sm-3" >
-                            <button type="button" className="btn btn-primary" onClick={this.fetchResults(question.QuestionKey)} autoComplete="off" >View Results</button>
+                            <button type="button" className="btn btn-primary" onClick={() => {
+                                this.fetchResults(question.QuestionKey);
+                                }}
+                            >View Results</button>
                         </div>
                     </div>
                 </div>

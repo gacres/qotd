@@ -56,13 +56,9 @@ const formWrapped = reduxForm({
 })(QotdLogin);
 
 const mapStateToProps = (state) => {
-    //console.log("QotdLogin.mapStateToProps");
-    //console.log(state);
     return { 
         username: state.username,
-        //questions: state.questions,
-        qotd: state.qotd,
-        token: state.token
+        qotd: state.qotd
     }
 };
 
