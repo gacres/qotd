@@ -21,6 +21,7 @@ const App = () => {
                             <Col></Col>
                             <Col xs={10}>
                                 <Route path="/" exact component={QotdLogin} />
+                                <Route path="/index.html" exact component={QotdLogin} />
                                 <Route path="/qotd" exact component={QotdSurveyEdit} />
                                 <Route path="/result/:id" exact component={QotdSurveyDisplay} />
                                 <Route path="/results" exact component={QotdList} />
