@@ -14,12 +14,14 @@ import memoryStore from '../utils/memory-store';
 var config = {headers: { 'Content-Type': 'application/json' }, auth: { 'username': 'gacres', 'password': 'c3ugforever'}};
 var token = "";
 
-export const login = () => async dispatch => {
+export const login = (source) => async dispatch => {
     const response = await api.get('/login', config);
 
     dispatch({ type: LOG_IN, payload: response.data});
     memoryStore.token = response.data.token;
-    history.push('/');
+    if (source === 'home') {
+        history.push('/');
+    }
 }
 
 export const signIn = (username) => async dispatch => {

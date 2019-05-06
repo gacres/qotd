@@ -10,8 +10,6 @@ export default (state = {}, action) => {
         case SIGN_IN:
             return { ...state, ...action.payload.documents[_.findIndex(action.payload.documents)] };
         // case FETCH_QOTD:
-        //     console.log("qotdReducer.FETCH_QOTD:");
-        //     console.log(action.payload);
         //     return { ...state, ...action.payload };
         case SUBMIT_QOTD:
             return { ...state, ...action.payload };

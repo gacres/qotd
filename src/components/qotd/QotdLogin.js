@@ -9,7 +9,7 @@ import Form from 'react-bootstrap/Form';
 class QotdLogin extends React.Component {
     state = { username: '', token: '' };
     componentDidMount() {
-        this.props.login();
+        this.props.login("home");
     }
 
     onFormSubmit = (event) => {

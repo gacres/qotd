@@ -19,7 +19,7 @@ const App = () => {
                     <Container>
                         <Row>
                             <Col></Col>
-                            <Col xs={8}>
+                            <Col xs={10}>
                                 <Route path="/" exact component={QotdLogin} />
                                 <Route path="/qotd" exact component={QotdSurveyEdit} />
                                 <Route path="/result/:id" exact component={QotdSurveyDisplay} />

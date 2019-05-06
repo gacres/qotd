@@ -38,7 +38,7 @@ class QotdSurveyDisplay extends React.Component {
         return (
             <div>
                 <br />
-                <Card style={{ width: '26rem' }}>
+                <Card style={{ width: '20rem' }}>
                     <Card.Header as="h5">Question of the Day</Card.Header>
                     <Card.Body>
                         <Card.Title>{qTitle}</Card.Title>
@@ -65,7 +65,6 @@ const mapStateToProps = (state) => {
         qotd: state.qotd,
         questions: Object.values(state.questions),
         result: state.result,
-        //token: state.token.token,
         username: state.username.username
     }
 };

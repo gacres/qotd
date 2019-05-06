@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
-import { fetchResult, fetchQuestions } from '../../actions';
-
+import { fetchResult, fetchQuestions, login } from '../../actions';
 
 class QotdList extends React.Component {
     componentDidMount() {
-        console.log(this.props);
+        //console.log(this.props);
         this.props.fetchQuestions();
     }
 
@@ -55,4 +54,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, { fetchResult, fetchQuestions })(formWrapped);
+export default connect(mapStateToProps, { fetchResult, fetchQuestions, login })(formWrapped);

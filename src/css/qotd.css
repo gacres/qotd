@@ -1,0 +1,6 @@
+progress .progressOverride {
+    height: 2rem;
+    font-size: 1.25;
+    background-color: lightsteelblue;
+    margin: 5px;
+}
