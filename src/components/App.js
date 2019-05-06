@@ -18,7 +18,7 @@ const App = () => {
                     <Navigation />
                     <Container>
                         <Row>
-                            <Col></Col>
+                            
                             <Col xs={10}>
                                 <Route path="/" exact component={QotdLogin} />
                                 <Route path="/index.html" exact component={QotdLogin} />
@@ -26,7 +26,7 @@ const App = () => {
                                 <Route path="/result/:id" exact component={QotdSurveyDisplay} />
                                 <Route path="/results" exact component={QotdList} />
                             </Col>
-                            <Col></Col>
+                            
                         </Row>
                     </Container>
                 </div>

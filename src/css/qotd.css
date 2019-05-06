@@ -1,4 +1,4 @@
-progress .progressOverride {
+.progressOverride {
     height: 2rem;
     font-size: 1.25;
     background-color: lightsteelblue;

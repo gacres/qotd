@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { fetchQuestions, fetchResult } from '../../actions';
 import { reduxForm } from 'redux-form';
 import Card from 'react-bootstrap/Card';
+import '../../css/qotd.css'
 import ProgressBar from 'react-bootstrap/ProgressBar';
 
 class QotdSurveyDisplay extends React.Component {
@@ -24,8 +25,8 @@ class QotdSurveyDisplay extends React.Component {
             return results.map((result, key) => {
                 let lbl = result.choice + ' ' + result.value;
 
-                return <div key={key}>
-                    <ProgressBar striped label={lbl} variant={striping[key]} now={result.value} max={answers.total_responses}/>
+                return <div key={key} className="prgressOverride">
+                    <ProgressBar className="progressOverride" striped label={lbl} variant={striping[key]} now={result.value} max={answers.total_responses}/>
                 </div>
             });
         }
@@ -38,7 +39,7 @@ class QotdSurveyDisplay extends React.Component {
         return (
             <div>
                 <br />
-                <Card style={{ width: '20rem' }}>
+                <Card>
                     <Card.Header as="h5">Question of the Day</Card.Header>
                     <Card.Body>
                         <Card.Title>{qTitle}</Card.Title>

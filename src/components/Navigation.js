@@ -5,8 +5,8 @@ import { NavLink } from 'react-router-dom';
 
 class Navigation extends React.Component {
     componentDidMount() {
-
     }
+    
 
     render() {
         return (
@@ -14,7 +14,7 @@ class Navigation extends React.Component {
                 <Navbar collapseOnSelect bg="light" variant="light" expand="lg">
                     <Navbar.Brand href="/">
                         <img
-                            src="/c3ug_icon.png"
+                            src="c3ug_icon.png"
                             width="30"
                             height="30"
                             className="d-inline-block align-top"
