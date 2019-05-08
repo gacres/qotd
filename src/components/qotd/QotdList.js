@@ -15,6 +15,7 @@ class QotdList extends React.Component {
 
     renderList() {
         return this.props.questions.map(question => {
+            //console.log(question);
             return (
                 <div className="alert alert-secondary" key={question.QuestionKey}>
                     <div className="row">
@@ -23,6 +24,7 @@ class QotdList extends React.Component {
                         </div>
                         <div className="col-sm-3" >
                             <button type="button" className="btn btn-primary" onClick={() => {
+                               
                                 this.fetchResults(question.QuestionKey);
                                 }}
                             >View Results</button>

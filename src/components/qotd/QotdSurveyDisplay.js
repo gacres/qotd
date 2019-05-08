@@ -8,11 +8,12 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 
 class QotdSurveyDisplay extends React.Component {
 
-    componentDidMount() {
+    componentWillMount() {
         const { id } = this.props.match.params;
-        if (this.props.result.length === 0) {
+        //if (this.props.result.length === 0) {
+
             this.props.fetchResult(id);
-        }
+        //}
     }
 
     generateResultGraph() {
@@ -34,8 +35,12 @@ class QotdSurveyDisplay extends React.Component {
     }
 
     render() {
-        const qotd = this.props.qotd;
-        const qTitle = qotd.QuestionText;
+        
+        const answers = this.props.result;
+        let qTitle = answers.QustionText;
+        let qDescr = answers.QuestionDescription;
+        console.log("-->",answers);
+        
         return (
             <div>
                 <br />
@@ -43,7 +48,7 @@ class QotdSurveyDisplay extends React.Component {
                     <Card.Header as="h5">Question of the Day</Card.Header>
                     <Card.Body>
                         <Card.Title>{qTitle}</Card.Title>
-                        <div>{qotd.QuestionDescription}</div>
+                        <div>{qDescr}</div>
                         <br />
                         <div>
                             {this.generateResultGraph()}

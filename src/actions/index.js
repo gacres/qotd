@@ -44,18 +44,22 @@ export const signIn = (username) => async dispatch => {
 };
 
 export const fetchResult = (questionKey) => async dispatch => {
+    
     token = {headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + memoryStore.token }};
     const response = await api.get(`/resultsforquestionkey/${questionKey}`, token);
-
-    dispatch({ type: FETCH_RESULT, payload: response.data });
+    let payload_back = response.data;
+    
+    
+    dispatch({ type: FETCH_RESULT, payload: payload_back });
     history.push(`/result/${questionKey}`);
 }
+
 
 export const fetchQotd = (questionKey) => async dispatch => {
     token = {headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + memoryStore.token }};
     const response = await api.get(`/resultsforquestionkey/${questionKey}`, token);
-
-    dispatch({ type: FETCH_QOTD, payload: response.data });
+    
+    dispatch({ type: FETCH_QOTD, payload: response.data});
     history.push(`/result/${questionKey}`);
 };
 

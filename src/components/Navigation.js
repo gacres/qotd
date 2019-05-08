@@ -12,7 +12,7 @@ class Navigation extends React.Component {
         return (
             <div>
                 <Navbar collapseOnSelect bg="light" variant="light" expand="lg">
-                    <Navbar.Brand href="/">
+                    <Navbar.Brand href="/c3ug-qotd/index.html">
                         <img
                             src="c3ug_icon.png"
                             width="30"
