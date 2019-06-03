@@ -10,10 +10,7 @@ class QotdSurveyDisplay extends React.Component {
 
     componentWillMount() {
         const { id } = this.props.match.params;
-        //if (this.props.result.length === 0) {
-
-            this.props.fetchResult(id);
-        //}
+        this.props.fetchResult(id);
     }
 
     generateResultGraph() {
@@ -31,7 +28,6 @@ class QotdSurveyDisplay extends React.Component {
                 </div>
             });
         }
-
     }
 
     render() {

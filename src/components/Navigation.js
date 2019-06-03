@@ -3,11 +3,16 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { NavLink } from 'react-router-dom';
 
+// react-router-dom caused a problem when combined with react-bootstrap
+// navigation <back> from the external web links failed
+// there is another library that we did not implement that could help
+// with this problem - illustrates that there is a library for pretty
+// much anything, but that also can get you into trouble
+
 class Navigation extends React.Component {
     componentDidMount() {
     }
     
-
     render() {
         return (
             <div>

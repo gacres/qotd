@@ -47,7 +47,7 @@ class QotdSurveyEdit extends React.Component {
         const submitData = {
             'QuestionKey': this.props.qotd.QuestionKey, 
             'QuestionType': this.props.qotd.QuestionType, 
-            'ResponseAuthor': 'Heiko Voigt/Harbour-Light/CA',
+            'ResponseAuthor': 'Heiko Voigt/Harbour-Light/CA',                   // yes, this shouldn't be hard coded
             'ResponseComment': 'These extra fields are for future flexibility',
             'ResponseContent': formValues.answer.split(','),
             'ResponseKey': '',

@@ -5,7 +5,6 @@ import { fetchResult, fetchQuestions, login } from '../../actions';
 
 class QotdList extends React.Component {
     componentDidMount() {
-        //console.log(this.props);
         this.props.fetchQuestions();
     }
 
@@ -15,7 +14,6 @@ class QotdList extends React.Component {
 
     renderList() {
         return this.props.questions.map(question => {
-            //console.log(question);
             return (
                 <div className="alert alert-secondary" key={question.QuestionKey}>
                     <div className="row">
