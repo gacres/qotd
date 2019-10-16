@@ -10,18 +10,43 @@ import {
     SUBMIT_QOTD
 } from './types';
 import memoryStore from '../utils/memory-store';
+import qs from 'qs';
 
-var config = {headers: { 'Content-Type': 'application/json' }, auth: { 'username': 'gacres', 'password': 'c3ugforever'}};
+//var config = {headers: { 'Content-Type': 'application/json' }, auth: { 'username': 'gacres', 'password': 'c3ugforever'}};
+var config = {
+        headers: { 
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': '*/*'
+        }
+    };
 var token = "";
+const data = {
+    client_id: '0b46a3a2-ff71-4804-94f0-067683df93c5',
+    client_secret: 'L4nq/okH/SvON02p7wngULaTzPa8O7gtd57qTpPeFfdIOic9SpmCb23j82MEMmbm'
+};
 
 export const login = (source) => async dispatch => {
-    const response = await api.get('/login', config);
+    console.log('I am logging...');
+    //const response = await api.post('/getoauth2accesstoken', JSON.stringify(data), config);
+    api.post('/getoauth2accesstoken', qs.stringify(data), config)
+    .then((response) => {
+        console.log('Yay', response.data)
+        dispatch({ type: LOG_IN, payload: response.data});
+        memoryStore.token = response.data.access_token;
+        console.log(response.data);
+        if (source === 'home') {
+            history.push('/');
+        }
+    })
+    .catch((err) => {
+        if(err.response) {
+            err = err.response.data
+        } else if (err.message) {
+            err = err.message
+        }
 
-    dispatch({ type: LOG_IN, payload: response.data});
-    memoryStore.token = response.data.token;
-    if (source === 'home') {
-        history.push('/');
-    }
+        console.log('Boo', err)
+    })
 }
 
 export const signIn = (username) => async dispatch => {

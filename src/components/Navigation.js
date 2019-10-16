@@ -32,8 +32,6 @@ class Navigation extends React.Component {
                         <Nav className="mr-auto">
                             <Nav.Link as={NavLink} to="/qotd">Today's Question</Nav.Link>
                             <Nav.Link as={NavLink} to="/results">Results</Nav.Link>
-                            <Nav.Link href="https://c3ug.ca">C3UG</Nav.Link>
-                            <Nav.Link href="https://openntf.org">OpenNTF</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
