@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "/c3ug-qotd/",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
     "qs": "^6.9.0",
